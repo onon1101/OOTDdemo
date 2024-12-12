@@ -5,10 +5,10 @@
     </button>
     <SearchBar />
     <div class="flex space-x-8 mr-8">
-        <div>
+        <button on:click={cartHandler}>
             <i class="fa-solid fa-cart-shopping"></i>
             <p class="inline">Cart</p>
-        </div>
+        </button>
         <button on:click={goToLogin}>
             <i class="fa-solid fa-user"></i>
             <p class="inline">Login</p>
@@ -19,6 +19,7 @@
 <script lang="ts">
     import Logo from '@/assets/logo.png';
     import SearchBar from '@/components/SearchBar.svelte';
+    import { cartState } from '@/stores/cart';
     import { navigate } from 'svelte-routing';
 
     async function goHomeHandler() {
@@ -27,5 +28,13 @@
 
     async function goToLogin() {
         navigate('/login');
+    }
+
+    function cartHandler() {
+        if ($cartState === false) {
+            alert('Please login first');
+        } else {
+            navigate('/cart');
+        }
     }
 </script>
